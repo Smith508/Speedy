@@ -34,3 +34,6 @@ The loadInitialLogin method went from taking 46ms to complete to only 2ms. Speed
  - Any block of code within the 100-200ms range causes the slowness to become noticeable to the user. 
  - The screen draws every 16ms, in order to maintain 60fps, and any work that takes longer will block the main thread and should be put on    a backgorund thread.
  - AsyncTasks are great for small quick operations that need to work with UI elements, but should only be used with work that takes no        longer than 5 ms to complete. AsyncTasks are threaded serially and can block with long running work. 
+ 
+ # How Do I Optimize?
+ 
