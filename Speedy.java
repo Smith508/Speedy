@@ -45,7 +45,11 @@ class Speedy {
     private Boolean isInitialSet = false;
     private long prevCurrent = -1; // Value is set after current is set in checkDelta to ensure no duplicates
     private String methodName;
-    private ArrayList<logtastic> logs; // With each call to checkDelta a new logtastic object is added. logs is displayed when finishTime() is called.
+    private ArrayList<com.fullsail.smith.speedydemo.Speedy.logtastic> logs; // With each call to checkDelta a new logtastic object is added. logs is displayed when finishTime() is called.
+
+    // User's can start to perceive slowness in an app in the 100-200ms range
+    private static final long SLOWNESS_PERCEPTIBLE_MIN = 100;
+    //private static final long SLOWNESS_PERCEPTIBLE_MAX = 200;
 
     // Screen draws every 16ms any work that takes longer blocks the thread and needs to be threaded
     private static final long SCREEN_DRAW_INTERVAL = 16;// 16ms
@@ -123,7 +127,7 @@ class Speedy {
         }//END if prevCurrent != current
 
         // Add to the logs Arraylist
-        logs.add(new logtastic(jobName,delta));
+        logs.add(new com.fullsail.smith.speedydemo.Speedy.logtastic(jobName,delta));
 
 
     }//END checkDelta
@@ -142,7 +146,7 @@ class Speedy {
         Log.i(TAG, methodName);
 
         // Loop through logs and display the info
-        for (logtastic log : logs) {
+        for (com.fullsail.smith.speedydemo.Speedy.logtastic log : logs) {
 
             // Log out the job info
             log.logInfo();
@@ -157,6 +161,14 @@ class Speedy {
         Log.i(TAG, logs.size() + " tasks took total of " + delta + " ms to complete");
 
         Log.i(TAG, ".............................................................................");
+
+        // Check if the slowness is perceptible to the user
+        if (delta >= SLOWNESS_PERCEPTIBLE_MIN){// delta >= 100
+
+            Log.i(TAG, "Note: The slowness is perceptible to the user. ");
+
+
+        }//END if delta >= SLOWNESS_PERCEPTIBLE_MIN
 
         // Check async task interval
         if (delta > CAN_USE_ASYNC_TASK_INTERVAL){// More than 5ms to complete
@@ -231,3 +243,4 @@ class Speedy {
 
 
 }
+
