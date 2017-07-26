@@ -22,3 +22,6 @@ The logs for this would look like:
 ![screen shot 2017-07-26 at 12 05 58 pm](https://user-images.githubusercontent.com/6344435/28632692-5ff7d1ae-71ff-11e7-9c24-de5b47c8b9f9.png)
 
 After a little optimization the method might look like this:                                                                    
+![screen shot 2017-07-26 at 12 10 40 pm](https://user-images.githubusercontent.com/6344435/28632914-06c80648-7200-11e7-9357-1396ef3d2aaf.png)
+
+Now lets see how the logs look after the optimization:
