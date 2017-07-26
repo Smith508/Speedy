@@ -38,7 +38,7 @@ The loadInitialLogin method went from taking 46ms to complete to only 2ms. Speed
  - Getting a 0 as a delta(change) doesn't necessarily mean the 'prevCurrent' variable and the 'current' variable match. It could just be      so minuscule that it doesn't register as a long or a float changing.
  
  # How Do I Optimize?
- Depending on your particular situation you may want to use AsyncTask, HandlerThread or ThreadPoolExecutor.
+ Depending on your particular situation you may want to use AsyncTask, Runnable, HandlerThread or ThreadPoolExecutor.
  - AsyncTask is good for short operations like loading and decoding a bitmap. Move work to the doInBackground() method. NOTE: Use            WeakReference for UI elements to help with garbage collection.
  - Use a runnable passed to a created thread, like in the example above. You should set the thread priority to                                Process.THREAD_PRIORITY_BACKGROUND. Move the work to the runnable's run() method. Be sure to call the created thread's .start() method.
  - HandlerThread is good for long running background work that will need to interact with UI at some point. This class allows you to          manage some of the workflow. This comes in handy when dealing with timing and callbacks. Documentation gives an example of grabbing the    preview frame from the camera. If this callback is invoked on the main thread it now has large arrays of pixels to handle while also      rendering. NOTE: Need to specify thread priority.
