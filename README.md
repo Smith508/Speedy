@@ -31,9 +31,15 @@ Now lets see how the logs look after the optimization:
 The loadInitialLogin method went from taking 46ms to complete to only 2ms. Speedy is now ready to be removed from this method. 
 
 # Things to Note
- - Any block of code within the 100-200ms range causes the slowness to become noticeable to the user. 
+ - Any block of code within the 100-200ms range on the MainThread causes the slowness to become noticeable to the user. 
  - The screen draws every 16ms, in order to maintain 60fps, and any work that takes longer will block the main thread and should be put on    a backgorund thread.
- - AsyncTasks are great for small quick operations that need to work with UI elements, but should only be used with work that takes no        longer than 5 ms to complete. AsyncTasks are threaded serially and can block with long running work. 
+ - Each thread takes up 64kb of memory.
+ - AsyncTasks are great for small quick operations that need to work with UI elements, but should only be used with work that takes no        longer than 5 ms to complete. AsyncTasks are threaded serially and can block with long running work.  
+ - Getting a 0 as a delta(change) doesn't necessarily mean the 'prevCurrent' variable and the 'current' variable match. It could just be      so minuscule that it doesn't register as a long or a float changing.
  
  # How Do I Optimize?
- 
+ Depending on your particular situation you may want to use AsyncTask, HandlerThread or ThreadPoolExecutor.
+ - AsyncTask is good for short operations like loading and decoding a bitmap. Move work to the doInBackground() method. NOTE: Use            WeakReference for UI elements to help with garbage collection.
+ - Use a runnable passed to a created thread, like in the example above. You should set the thread priority to                                Process.THREAD_PRIORITY_BACKGROUND. Move the work to the runnable's run() method. Be sure to call the created thread's .start() method.
+ - HandlerThread is good for long running background work that will need to interact with UI at some point. This class allows you to          manage some of the workflow. This comes in handy when dealing with timing and callbacks. Documentation gives an example of grabbing the    preview frame from the camera. If this callback is invoked on the main thread it now has large arrays of pixels to handle while also      rendering. NOTE: Need to specify thread priority.
+ - ThreadPoolExecutor
