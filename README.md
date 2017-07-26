@@ -15,7 +15,7 @@ Steps:
 2) Decide where you want to begin initially and call speedy.startJob()
 3) After a job is completed call speedy.checkDelta() and pass in a String to describe the job that was completed ex: "Reading from Storage". 
 ** Each startJob call must be followed by a checkDelta call **
-4) Continue steps 2 & 3 for each other job you wish to check
+4) Continue steps 2 & 3 for each other job you wish to check within the block.
 5) Finally call speedy.finishTime() to end the check. Logs will display how long each job took to complete as well as the whole block from    the first call to startJob to finishTime. 
 ![screen shot 2017-07-26 at 12 05 23 pm](https://user-images.githubusercontent.com/6344435/28631860-b43e16cc-71fc-11e7-8a6b-449f99a15275.png)
 
