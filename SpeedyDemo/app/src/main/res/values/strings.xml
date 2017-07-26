@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SpeedyDemo</string>
+    <string name="while_loop">While Loop</string>
+    <string name="for_each">For Each</string>
+    <string name="for_loop">For Loop</string>
+    <string name="local_broadcast_parcelable">Local Broadcast Parcelable</string>
+    <string name="local_broadcast_serializable">Local Broadcast Serializable</string>
+    <string name="parcelable">Parcelable</string>
+    <string name="serializable">Serializable</string>
+</resources>

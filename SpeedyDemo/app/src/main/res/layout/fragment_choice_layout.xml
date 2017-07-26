@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical" android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_serializable_button"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/serializable"/>
+
+    <Button
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_parcelable_button"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/parcelable"/>
+
+    <Button
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_local_broadcast_serializable_button"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/local_broadcast_serializable"/>
+
+    <Button
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_local_broadcast_parcelable_button"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/local_broadcast_parcelable"/>
+
+    <Button
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/main_for_loop_button"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/for_loop"/>
+
+    <Button
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_for_each_button"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/for_each"/>
+
+    <Button
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_while_loop_button"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/while_loop"/>
+
+
+</LinearLayout>
