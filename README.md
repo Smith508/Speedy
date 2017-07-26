@@ -31,7 +31,7 @@ Now lets see how the logs look after the optimization:
 The loadInitialLogin method went from taking 46ms to complete to only 2ms. Speedy is now ready to be removed from this method. 
 
 # Things to Note
- - Any block of code within the 100-200ms range on the MainThread causes the slowness to become noticeable to the user. 
+ - Any block of code within the 100-200ms range on the main thread causes the slowness to begin becoming noticeable to the user. 
  - The screen draws every 16ms, in order to maintain 60fps, and any work that takes longer will block the main thread and should be put on    a backgorund thread.
  - Each thread takes up 64kb of memory.
  - AsyncTasks are great for small quick operations that need to work with UI elements, but should only be used with work that takes no        longer than 5 ms to complete. AsyncTasks are threaded serially and can block with long running work.  
