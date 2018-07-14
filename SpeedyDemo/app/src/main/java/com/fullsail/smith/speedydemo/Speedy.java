@@ -31,14 +31,16 @@ import java.util.ArrayList;
  -- This will log out how long each job took to complete as well as how long the whole bit
  of code you checked took from the first call to startJob()
 
+ *** NOTE: Easily search for Speedy's logs by using 'TAGS' as the log search criteria.
+
  *** NOTE: Getting a 0 as a delta(change) doesn't necessarily mean the 'prevCurrent' variable and the 'current' variable match -
  -- it could just be so minuscule that it doesn't register as a long or a float changing.
 
  **/
 
-class Speedy {
+public class Speedy {
 
-    private static final String TAG = "Speedy.TAG";
+    private static final String TAG = "Speedy.TAGS";
     private long begin; // Value is set with each call to startJob -- (beginning of individual job)
     private long delta; // Value is calculated in checkDelta()
     private long initial = -1; // Value is set with thte first call to startJob()
@@ -58,15 +60,14 @@ class Speedy {
     private static final long CAN_USE_ASYNC_TASK_INTERVAL = 5;// 5ms
 
     // Pass in method name to be used when logging out times
-    Speedy(String methodName) {
+    public Speedy(String methodName) {
 
         this.methodName = methodName;
         logs = new ArrayList<>();
-
     }//END constructor
 
     ///*** Call startJob with each location you want to start timing, must end each job with checkDelta ***\\\
-    void startJob(){
+    public void startJob(){
 
         if (!isInitialSet){// First call to startJob()
 
@@ -79,21 +80,15 @@ class Speedy {
             // Set begin to initial's value
             begin = initial;
 
-
         } else {// isInitialSet is true -- initial time already recorded
 
             // Set start time of job to current time
             begin = System.currentTimeMillis();
-
-
         }//END if !isInitialSet
-
-
     }// END startJob
 
-
     ///*** Call checkDelta after you want to end the job started with startJob. Will add the timing info as well as the jobName to logs arraylist to be dipslayed later.
-    void checkDelta(String jobName){
+    public void checkDelta(String jobName){
 
         // Reset delta
         delta = 0;
@@ -105,8 +100,6 @@ class Speedy {
 
             // Set prevCurrent to current
             prevCurrent = current;
-
-
         }//END prevCurrent == -1
 
         if (prevCurrent != current){// Not first check
@@ -117,24 +110,18 @@ class Speedy {
             // Set prevCurrent to current
             prevCurrent = current;
 
-
         } else {// prevCurrent == current
 
             // Set delta to zero because the time has not changed
             delta = current - begin;
-
-
         }//END if prevCurrent != current
 
         // Add to the logs Arraylist
         logs.add(new logtastic(jobName,delta));
-
-
     }//END checkDelta
 
-
     ///*** Call finish time when finished with chunk of code you are timing to display the max time as well as the job times ***\\\
-    void finishTime(){
+    public void finishTime(){
 
         // Reset values
         delta = 0;
@@ -142,7 +129,6 @@ class Speedy {
         initial = -1;
 
         Log.i(TAG, ".............................................................................");
-
         Log.i(TAG, methodName);
 
         // Loop through logs and display the info
@@ -153,21 +139,16 @@ class Speedy {
 
             // Increment delta with the log object's delta value
             delta = delta + log.getDelta();
-
-
         }//END for logtastic log : logs
 
         // Log out the total time
         Log.i(TAG, logs.size() + " tasks took total of " + delta + " ms to complete");
-
         Log.i(TAG, ".............................................................................");
 
         // Check if the slowness is perceptible to the user
         if (delta >= SLOWNESS_PERCEPTIBLE_MIN){// delta >= 100
 
             Log.i(TAG, "Note: The slowness is perceptible to the user. ");
-
-
         }//END if delta >= SLOWNESS_PERCEPTIBLE_MIN
 
         // Check async task interval
@@ -177,69 +158,42 @@ class Speedy {
             if (delta > SCREEN_DRAW_INTERVAL){// Longer than 16ms to complete
 
                 Log.i(TAG,"Tip: longer than " + SCREEN_DRAW_INTERVAL + "ms. Consider threading some of the work"  );
-
-
             } else {// Shorter than 16ms to complete
 
                 Log.i(TAG, "Tip: took longer than " + CAN_USE_ASYNC_TASK_INTERVAL + "ms. Consider using handler thread or run a runnable\n     on a created thread for the background work" );
-
-
             }//END if delta > SCREEN_DRAW_INTERVAL
-
 
         } else { // delta <= CAN_USE_ASYNC_TASK INTERVAL
 
             Log.i(TAG,  "Tip: within " + CAN_USE_ASYNC_TASK_INTERVAL + "ms. If applicable consider use async task for the background work" );
-
-
         }//END if delta > CAN_USE_ASYNC_TASK_INTERVAL
-
         Log.i(TAG, ".............................................................................\n.");
-
-
     }//END finishTime()
 
-
-
-    void updateMethodName(String methodName){
+    public void updateMethodName(String methodName){
 
         this.methodName = methodName;
-
     }//END updateMethodName()
-
-
 
     private class logtastic {
 
         private final String jobName;
         private final long delta;
 
-        logtastic(String jobName, long delta) {
+        private logtastic(String jobName, long delta) {
 
             this.jobName = jobName;
             this.delta = delta;
-
-
         }//END constructor
 
-
-        void logInfo(){
+        private void logInfo(){
 
             Log.i(TAG, jobName + " took " + delta + " ms to complete");
-
-
         }//END logInfo
 
-
-        long getDelta(){
+        private long getDelta(){
 
             return this.delta;
-
-
         }//END getDelta
-
-
-    }//END logstastic class
-
-
+    }//END logtastic class
 }
