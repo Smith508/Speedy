@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.speedy.Speedy;
+
 import java.util.ArrayList;
 
 /**
@@ -46,7 +48,7 @@ import java.util.ArrayList;
 
 public class ChoiceFrag extends Fragment {
 
-    public static final String TAG = "ChoiceFrag.TAG";
+    public static final String TAG = "ChoiceFrag.TAGS";
     public static final String ACTION_SERIAL = "com.fullsail.smith.speedysample.ACTION_SERIAL";
     public static final String ACTION_PARCELABLE = "com.fullsail.smith.speedysample.ACTION_PARCELABLE";
     public static final String EXTRA_SERIAL = "com.fullsail.smith.speedysample.EXTRA_SERIAL";
@@ -60,8 +62,6 @@ public class ChoiceFrag extends Fragment {
     public static ChoiceFrag newInstance(){
 
         return new ChoiceFrag();
-
-
     }//END newInstance()
 
     @Override
@@ -70,7 +70,6 @@ public class ChoiceFrag extends Fragment {
 
         // Create Speedy object passing in the method name
         speedy = new Speedy("Sample Example: ");
-
     }//END onActivityCreated
 
     @Override
@@ -97,7 +96,6 @@ public class ChoiceFrag extends Fragment {
 
                     tempStrings.add(String.valueOf(i));
                     tempNums.add(i);
-
                 }//END for int i = 0; i < 750; i++
 
                 data.setNums(tempNums);
@@ -115,11 +113,7 @@ public class ChoiceFrag extends Fragment {
 
                 // Send regular broadcast
                 getActivity().sendBroadcast(serialBroadcast);
-
-
             }//END onClick
-
-
         });//END serial.setOnClickListener
 
         final Button parcelable = (Button)view.findViewById(R.id.main_parcelable_button);
@@ -138,7 +132,6 @@ public class ChoiceFrag extends Fragment {
 
                     tempStrings.add(String.valueOf(i));
                     tempNums.add(i);
-
                 }//END for int i = 0; i < 750; i++
 
                 // TODO: Uncomment to show other finish method results
@@ -163,12 +156,8 @@ public class ChoiceFrag extends Fragment {
                 // Send regular broadcast
                 getActivity().sendBroadcast(parcelableBroadcast);
 
-
             }//END onClick
-
         });//END parcelable.setOnClickListener
-
-
 
         Button localBroadcastSerializbleButton = (Button)view.findViewById(R.id.main_local_broadcast_serializable_button);
         localBroadcastSerializbleButton.setOnClickListener(new View.OnClickListener() {
@@ -186,7 +175,6 @@ public class ChoiceFrag extends Fragment {
 
                     tempStrings.add(String.valueOf(i));
                     tempNums.add(i);
-
                 }//END for int i = 0; i < 750; i++
 
                 // Set data
@@ -205,14 +193,8 @@ public class ChoiceFrag extends Fragment {
 
                 // Send local broadcast
                 LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(serialBroadcast);
-
-
             }//END onClick
-
-
         });//END localSerialBroadcastButton.setOnClickListener
-
-
 
         Button localBroadcastParcelableButton = (Button)view.findViewById(R.id.main_local_broadcast_parcelable_button);
         localBroadcastParcelableButton.setOnClickListener(new View.OnClickListener() {
@@ -230,7 +212,6 @@ public class ChoiceFrag extends Fragment {
 
                     tempStrings.add(String.valueOf(i));
                     tempNums.add(i);
-
                 }//END for int i = 0; i < 750; i++
 
                 data.setNums(tempNums);
@@ -248,13 +229,9 @@ public class ChoiceFrag extends Fragment {
 
                 // Send local parcelable broadcast
                 LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(parcelableBroadcast);
-
-
             }//END onClick
 
-
         });//END localBroadcastParcelableButton
-
 
         Button forLoopButton = (Button)view.findViewById(R.id.main_for_loop_button);
         forLoopButton.setOnClickListener(new View.OnClickListener() {
@@ -274,7 +251,6 @@ public class ChoiceFrag extends Fragment {
                 for (int i = 0; i < 750; i++){
 
                     Log.i(TAG, "onClick: i: " + i);
-
                 }//END for int i = 0; i < 750; i++
 
                 // Check how long it took to loop and print
@@ -282,13 +258,8 @@ public class ChoiceFrag extends Fragment {
 
                 // Finish speedy
                 speedLogger.finishTime();
-
-
             }//END onClick
-
-
         });// END forLoopButton.setOnClickListener
-
 
         Button forEachButton = (Button)view.findViewById(R.id.main_for_each_button);
         forEachButton.setOnClickListener(new View.OnClickListener() {
@@ -305,7 +276,6 @@ public class ChoiceFrag extends Fragment {
                 for (int i = 0; i < 750; i++){
 
                     nums.add(i);
-
                 }//END for int i = 0; i < 750; i++
 
                 // Creating Speedy object
@@ -318,7 +288,6 @@ public class ChoiceFrag extends Fragment {
                 for (int num: nums) {
 
                     Log.i(TAG, "onClick: num: " + num);
-
                 }//END for num : nums
 
                 // Check how long it took to loop and print
@@ -326,13 +295,8 @@ public class ChoiceFrag extends Fragment {
 
                 // Finish speedy
                 speedLogger.finishTime();
-
-
             }//END onClick
-
-
         });//END forEachButton.setOnClickListener
-
 
         Button whileButton = (Button)view.findViewById(R.id.main_while_loop_button);
         whileButton.setOnClickListener(new View.OnClickListener() {
@@ -354,7 +318,6 @@ public class ChoiceFrag extends Fragment {
 
                     Log.i(TAG, "onClick: i: " + i);
                     i++;
-
                 }//END while i < 750
 
                 // Check how long it took to loop and print
@@ -362,8 +325,6 @@ public class ChoiceFrag extends Fragment {
 
                 // Finish speedy
                 speedLogger.finishTime();
-
-
             }//END onClick
 
 
@@ -371,11 +332,7 @@ public class ChoiceFrag extends Fragment {
 
         // Return the view to be displayed
         return view;
-
-
     }//END onCreateView
-
-
 
     @Override
     public void onResume() {
@@ -389,11 +346,7 @@ public class ChoiceFrag extends Fragment {
         // Register receivers
         getActivity().registerReceiver(mReceiver, filter);
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mReceiver,filter);
-
-
     }//END onResume
-
-
 
     @Override
     public void onPause() {
@@ -403,18 +356,12 @@ public class ChoiceFrag extends Fragment {
         getActivity().unregisterReceiver(mReceiver);
 
         LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mReceiver);
-
-
     }//END onPause
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-
     }//END onDestroy
-
-
 
     BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
@@ -439,7 +386,6 @@ public class ChoiceFrag extends Fragment {
                 // Call checkDelta for the reading of the SerialData object from intent
                 speedy.checkDelta("BroadcastReceiver: Time check for reading of Serializable object");
 
-
             } else if (intent.getAction().contentEquals(ChoiceFrag.ACTION_PARCELABLE) && intent.hasExtra(ChoiceFrag.EXTRA_PARCELABLE)){// Parcelable
 
                 // Call checkDelta to demonstrate how long this if check took.
@@ -453,8 +399,6 @@ public class ChoiceFrag extends Fragment {
 
                 // Call checkDelta for the reading of the ParcelableData object from intent
                 speedy.checkDelta("BroadcastReceiver: Time check for reading of Parcelable object");
-
-
             }//END intent.getAction().contentEquals(ChoiceFrag.ACTION_SERIAL) && intent.hasExtra(ChoiceFrag.EXTRA_SERIAL)
 
             // Finish the time
@@ -463,12 +407,6 @@ public class ChoiceFrag extends Fragment {
             // This line is also for the sake of this example. This resets the global if need be, but as stated earlier
                 // this is best used on a method to method basis
             speedy = new Speedy("Sample Example: ");
-
-
         }//END onReceive
-
-
     };//END mReceiver
-
-
 }
