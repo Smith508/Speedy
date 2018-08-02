@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_width">275dp</dimen>
+    <dimen name="margin_separator">16dp</dimen>
+    <dimen name="text_view_bottom_margin">4dp</dimen>
+    <dimen name="text_view_text_size">16sp</dimen>
+</resources>

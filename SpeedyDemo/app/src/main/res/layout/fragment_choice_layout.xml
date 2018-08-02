@@ -1,57 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical" android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+    android:background="#f8f8f2">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/regular_broadcasts"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_view_text_size"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_separator"
+        android:layout_marginBottom="@dimen/text_view_bottom_margin"/>
 
     <Button
-        android:layout_width="275dp"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:id="@+id/main_serializable_button"
         android:layout_gravity="center_horizontal"
-        android:text="@string/serializable"/>
+        android:text="@string/serializable" />
 
     <Button
-        android:layout_width="275dp"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:id="@+id/main_parcelable_button"
         android:layout_gravity="center_horizontal"
         android:text="@string/parcelable"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/local_broadcast_manager_broadcasts"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_view_text_size"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_separator"
+        android:layout_marginBottom="@dimen/text_view_bottom_margin"/>
+
     <Button
-        android:layout_width="275dp"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:id="@+id/main_local_broadcast_serializable_button"
         android:layout_gravity="center_horizontal"
-        android:text="@string/local_broadcast_serializable"/>
+        android:text="@string/local_broadcast_serializable" />
 
     <Button
-        android:layout_width="275dp"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:id="@+id/main_local_broadcast_parcelable_button"
         android:layout_gravity="center_horizontal"
         android:text="@string/local_broadcast_parcelable"/>
 
-    <Button
-        android:layout_width="275dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:text="@string/loops"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_view_text_size"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_separator"
+        android:layout_marginBottom="@dimen/text_view_bottom_margin"/>
+
+    <Button
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
         android:id="@+id/main_for_loop_button"
         android:layout_gravity="center_horizontal"
         android:text="@string/for_loop"/>
 
     <Button
-        android:layout_width="275dp"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:id="@+id/main_for_each_button"
         android:layout_gravity="center_horizontal"
         android:text="@string/for_each"/>
 
     <Button
-        android:layout_width="275dp"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:id="@+id/main_while_loop_button"
         android:layout_gravity="center_horizontal"
         android:text="@string/while_loop"/>
-
-
 </LinearLayout>

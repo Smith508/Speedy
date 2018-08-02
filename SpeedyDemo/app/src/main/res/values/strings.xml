@@ -7,4 +7,7 @@
     <string name="local_broadcast_serializable">Local Broadcast Serializable</string>
     <string name="parcelable">Parcelable</string>
     <string name="serializable">Serializable</string>
+    <string name="regular_broadcasts">Regular Broadcasts</string>
+    <string name="local_broadcast_manager_broadcasts">LocalBroadcastManager Broadcasts</string>
+    <string name="loops">Loops</string>
 </resources>
