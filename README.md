@@ -5,6 +5,13 @@
 ## Overview
 Speedy consists of three key methods: **.startJob()**, **.checkDelta(String jobDescription)** & **.finishTime()**
 
+## Add to Project
+* **Step 1** Add it in your root build.gradle at the end of repositories:    
+<img width="690" alt="screen shot 2018-08-02 at 11 35 22 pm" src="https://user-images.githubusercontent.com/6344435/43623037-42de0a6a-96ad-11e8-8d61-bd3d25fcb6e9.png">    
+
+* **Step 2** Add the dependency.    
+<img width="683" alt="screen shot 2018-08-02 at 11 35 56 pm" src="https://user-images.githubusercontent.com/6344435/43623059-5cf906ca-96ad-11e8-9906-d543f34e5212.png">
+
 ### Example
 Here is a basic method to launch a fragment.           
 ![screen shot 2017-07-26 at 12 28 38 pm](https://user-images.githubusercontent.com/6344435/28632218-ce2e4812-71fd-11e7-92fb-218a72d19da1.png)
