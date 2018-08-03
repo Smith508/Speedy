@@ -32,6 +32,3 @@ dependencies {
     testApi 'junit:junit:4.12'
     api project(path: ':speedy')
 }
-
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.Smith508'
