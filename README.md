@@ -20,6 +20,7 @@ Now lets see what happens when we use Speedy.
 **5)** Finally call **speedy.finishTime()** to end the check. Logs will display how long each job took to complete as well as the whole block from    the first call to **startJob()** to **finishTime()**. 
 ![screen shot 2017-07-26 at 12 05 23 pm](https://user-images.githubusercontent.com/6344435/28631860-b43e16cc-71fc-11e7-8a6b-449f99a15275.png)
 
+- Search for the logs easily by searching for **TAGS** in the logcat.    
 The logs for this would look like:                                                                                        
 ![screen shot 2017-07-26 at 12 05 58 pm](https://user-images.githubusercontent.com/6344435/28632692-5ff7d1ae-71ff-11e7-9c24-de5b47c8b9f9.png)
 
