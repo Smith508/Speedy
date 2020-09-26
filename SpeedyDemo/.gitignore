@@ -7,3 +7,14 @@
 /build
 /captures
 .externalNativeBuild
+app/.idea/
+**/.idea/
+../.idea/
+**/local.properties/
+app/local.properties/
+**/gradlew.bat/
+**/gradlew.bat
+app/local.properties
+**/ui-debug.log
+**/database-debug.log
+**/gradle-wrapper.properties
