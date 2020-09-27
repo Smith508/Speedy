@@ -1,4 +1,4 @@
-package com.example.speedy;
+package com.smith.library.speedy;
 
 import org.junit.Test;
 

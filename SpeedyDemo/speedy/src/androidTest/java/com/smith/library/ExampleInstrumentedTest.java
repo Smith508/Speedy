@@ -1,4 +1,4 @@
-package com.example.speedy;
+package com.smith.library;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

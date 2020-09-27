@@ -11,7 +11,7 @@
         android:textStyle="bold"
         android:textSize="@dimen/text_view_text_size"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/margin_separator"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="@dimen/text_view_bottom_margin"/>
 
     <Button
@@ -19,14 +19,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_serializable_button"
         android:layout_gravity="center_horizontal"
-        android:text="@string/serializable" />
+        android:text="@string/serializable"
+        android:textAllCaps="false"/>
 
     <Button
         android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:id="@+id/main_parcelable_button"
         android:layout_gravity="center_horizontal"
-        android:text="@string/parcelable"/>
+        android:text="@string/parcelable"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_custom_serialzable"
+        android:layout_gravity="center_horizontal"
+        android:text="serializable_custom"
+        android:textAllCaps="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,7 +45,7 @@
         android:textStyle="bold"
         android:textSize="@dimen/text_view_text_size"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/margin_separator"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="@dimen/text_view_bottom_margin"/>
 
     <Button
@@ -43,14 +53,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_local_broadcast_serializable_button"
         android:layout_gravity="center_horizontal"
-        android:text="@string/local_broadcast_serializable" />
+        android:text="@string/local_broadcast_serializable"
+        android:textAllCaps="false"/>
 
     <Button
         android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:id="@+id/main_local_broadcast_parcelable_button"
         android:layout_gravity="center_horizontal"
-        android:text="@string/local_broadcast_parcelable"/>
+        android:text="@string/local_broadcast_parcelable"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_local_custom_serializable"
+        android:layout_gravity="center_horizontal"
+        android:text="serializable_custom"
+        android:textAllCaps="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,7 +79,7 @@
         android:textStyle="bold"
         android:textSize="@dimen/text_view_text_size"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/margin_separator"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="@dimen/text_view_bottom_margin"/>
 
     <Button
@@ -67,19 +87,22 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_for_loop_button"
         android:layout_gravity="center_horizontal"
-        android:text="@string/for_loop"/>
+        android:text="@string/for_loop"
+        android:textAllCaps="false"/>
 
     <Button
         android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:id="@+id/main_for_each_button"
         android:layout_gravity="center_horizontal"
-        android:text="@string/for_each"/>
+        android:text="@string/for_each"
+        android:textAllCaps="false"/>
 
     <Button
         android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:id="@+id/main_while_loop_button"
         android:layout_gravity="center_horizontal"
-        android:text="@string/while_loop"/>
+        android:text="@string/while_loop"
+        android:textAllCaps="false"/>
 </LinearLayout>
