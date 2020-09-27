@@ -1,4 +1,4 @@
-package com.smith.library;
+package com.smith.library.speedy;
 
 import org.junit.Test;
 
