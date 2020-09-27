@@ -3,59 +3,40 @@ package com.smith.library.speedy
 import android.util.Log
 
 /**
--  Speedy is a file to help with optimization and is meant to show you how long a method takes
-to complete.
-
--- After constructing your speedy object and passing in the method name if there is one.
-
--- You can start the timer by calling startJob().
-
--- You can call checkDelta() whenever you want to mark a portion of the code you want to get timing info for.
-
--  Each portion you want to record needs a startJob() call with a matching checkDelta.
-
--- For instance say you have a pullData() method that pulled info from an api, parsed it and then stored
-it locally you could call startJob() before the api pull section of code and after that section of code call
-checkDelta(passing in job name ex: "api pull").
-
--- You could then use this for the parsing and storing sections of code.
-
-- Speedy will record how long each job took to complete in milliseconds.
-
-- When all jobs you want to check within a method have been recorded call finishTime().
-
--- This will log out how long each job took to complete as well as how long the whole bit
-of code you checked took from the first call to startJob()
-
- *** NOTE: Easily search for Speedy's logs by using 'TAGS' as the log search criteria.
-
- *** NOTE: Getting a 0 as a delta(change) doesn't necessarily mean the 'prevCurrent' variable and the 'current' variable match -
--- it could just be so minuscule that it doesn't register as a long or a float changing.
-
+ * * **Speedy** is an optimization tool and is meant to show you how long a method takes to complete.
+ *
+ * * After constructing your Speedy object and passing in the method name you can start the timer by
+ * calling **startJob()**.
+ *
+ * * Call **checkDelta()** whenever you want to mark a portion of the code you want to get timing info for.
+ *
+ * * **Note**: Each portion you want to record needs a **startJob()** call with a matching **checkDelta()**.
+ *     - For instance say you have a pullData() method that pulled info from an api, parsed it and
+ *     then stored it locally you could call **startJob()** before the api pull section of code and after
+ *     that section of code call **checkDelta**(passing in job name ex: "api pull").
+ *
+ * * Speedy will record how long each job took to complete in **milliseconds**.
+ *
+ * * When all jobs you want to check within a method have been recorded call **finishTime()**.
+ *     - This will log out how long each job took to complete as well as how long the whole bit of code
+ *     you checked took from the first call to **startJob()**.
+ *
+ * * Easily search for Speedy's logs by using '**TAGS**' as the log search criteria.
+ *
+ * * **Note**: Getting a **0** as a **delta**(change) doesn't necessarily mean the '**prevCurrent**' variable and the
+ *     '**current**' variable match it could just be so minuscule that it doesn't register as a long or a float changing.
+ *
+ * @param methodName
+ * @author Ryan Smith
  **/
-class Speedy(private var methodName: String?) {
+class Speedy(private var methodName: String) {
 
-    private val TAG = "Speedy.TAGS"
     private var begin: Long = 0L // Value is set with each call to startJob().
     private var delta: Long = 0L // Value is calculated in checkDelta().
     private var initial: Long = -1L // Value is set with the first call to startJob().
     private var isInitialSet: Boolean = false
     private var prevCurrent: Long = -1L // Value is set after current is set in checkDelta to ensure no duplicates
     private val logs: MutableList<Logtastic> = arrayListOf() // With each call to checkDelta a new Logtastic object is added. logs are displayed when finishTime() is called.
-
-    // User's can start to perceive slowness in an app in the 100-200ms range
-    private val SLOWNESS_PERCEPTIBLE_MIN: Long = 100L
-    //private static final long SLOWNESS_PERCEPTIBLE_MAX = 200;
-
-    // Screen draws every 16ms any work that takes longer blocks the thread and needs to be threaded
-    private val SCREEN_DRAW_INTERVAL: Long = 16L// 16ms
-
-    // If work in an async task takes longer than 5ms try using another thread method
-    private val CAN_USE_ASYNC_TASK_INTERVAL: Long = 5L// 5ms
-
-    private val logSeparatorStart = "........................................Speedy START........................................"
-    private val logSeparator = "................................................................................"
-    private val logSeparatorFinish = "........................................Speedy FINISHED........................................"
 
     // State flags
     private var didStart = false
@@ -64,6 +45,8 @@ class Speedy(private var methodName: String?) {
     /**
      * Call startJob with each location you want to start timing,
      * must end each job with 'checkDelta()' call
+     *
+     * @throws IllegalStateException
      */
     @Throws(IllegalStateException::class)
     fun startJob() {
@@ -108,6 +91,9 @@ class Speedy(private var methodName: String?) {
     /**
      * Call checkDelta after you want to end the job started with startJob. Will add the timing
      * info as well as the jobName to logs arrayList to be displayed later
+     *
+     * @throws IllegalStateException
+     * @param jobName
      */
     @Throws(IllegalStateException::class)
     fun checkDelta(jobName: String) {
@@ -150,6 +136,8 @@ class Speedy(private var methodName: String?) {
     /**
      * Call finish time when finished with chunk of code you are timing to display the max time as
      * well as the job times.
+     *
+     * @throws IllegalStateException
      */
     @Throws(IllegalStateException::class)
     fun finishTime() {
@@ -181,30 +169,21 @@ class Speedy(private var methodName: String?) {
         Log.d(TAG, logSeparator)
 
         // Check if the slowness is perceptible to the user
-        if (delta >= SLOWNESS_PERCEPTIBLE_MIN) {// delta >= 100
+        when  {
+            delta in SLOWNESS_PERCEPTIBLE_RANGE  -> Log.d(TAG, "Note: The slowness is " +
+                    "perceptible to the user.")
 
-            //println("Note: The slowness is perceptible to the user.")
-            Log.d(TAG, "Note: The slowness is perceptible to the user.")
-        }
+            delta >= SLOWNESS_PERCEPTIBLE_MAX -> Log.d(TAG, "Note: The slowness is perceptible " +
+                    "to the user and has exceeded the 100ms-200ms starting threshold.")
 
-        // Check async task interval
-        if (delta > CAN_USE_ASYNC_TASK_INTERVAL) {// More than 5ms to complete
+            delta <= CAN_USE_ASYNC_TASK_INTERVAL -> Log.d(TAG, "Tip: within $CAN_USE_ASYNC_TASK_INTERVAL ms. " +
+                    "If applicable consider use async task for the background work")
 
-            // Check screen draw interval
-            if (delta > SCREEN_DRAW_INTERVAL) {// Longer than 16ms to complete
+            delta > SCREEN_DRAW_INTERVAL -> Log.d(TAG, "Tip: longer than $SCREEN_DRAW_INTERVAL ms. " +
+                    "Consider threading some of the work")
 
-                Log.d(TAG, "Tip: longer than $SCREEN_DRAW_INTERVAL ms. Consider threading some of the work")
-
-            } else {// Shorter than 16ms to complete
-
-                Log.d(TAG, "Tip: took longer than $CAN_USE_ASYNC_TASK_INTERVAL ms. Consider using " +
-                        "handler thread or run a runnable on a created thread for the background work.")
-            }
-
-        } else { // delta <= CAN_USE_ASYNC_TASK INTERVAL
-
-            Log.d(TAG, "Tip: within $CAN_USE_ASYNC_TASK_INTERVAL ms. If applicable consider use async "  +
-                    "task for the background work")
+            delta in CAN_USE_ASYNC_TASK_INTERVAL..SCREEN_DRAW_INTERVAL -> Log.d(TAG, "Tip: took longer than $CAN_USE_ASYNC_TASK_INTERVAL ms. Consider using " +
+                    "handler thread or run a runnable on a created thread for the background work.")
         }
 
         Log.d(TAG, " ")
@@ -375,5 +354,25 @@ class Speedy(private var methodName: String?) {
 
             Log.d(TAG, "$jobName took $delta ms to complete")
         }
+    }
+
+    private companion object {
+
+        private val TAG = "Speedy.TAGS"
+
+        // User's can start to perceive slowness in an app in the 100-200ms range
+        private const val SLOWNESS_PERCEPTIBLE_MIN = 100L
+        private const val SLOWNESS_PERCEPTIBLE_MAX = 200L
+        private val SLOWNESS_PERCEPTIBLE_RANGE = SLOWNESS_PERCEPTIBLE_MIN..SLOWNESS_PERCEPTIBLE_MAX
+
+        // Screen draws every 16ms any work that takes longer blocks the thread and needs to be threaded
+        private const val SCREEN_DRAW_INTERVAL: Long = 16L // 16ms
+
+        // If work in an async task takes longer than 5ms try using another thread method
+        private const val CAN_USE_ASYNC_TASK_INTERVAL: Long = 5L // 5ms
+
+        private const val logSeparatorStart = "........................................Speedy START........................................"
+        private const val logSeparator = "................................................................................"
+        private const val logSeparatorFinish = "........................................Speedy FINISHED........................................"
     }
 }

@@ -1,15 +1,19 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'maven-publish'
+apply from: file('speedy-pub.gradle')
+
+Properties props = new Properties()
+props.load(new FileInputStream(rootProject.file("speedy.properties")))
 
 android {
     compileSdkVersion 29
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode props["VERSION_CODE"] as Integer
+        versionName props["VERSION_NAME"]
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -28,16 +32,15 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-
     // kotlin
-    api "org.jetbrains.kotlin:kotlin-stdlib:1.3.72"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
 }
 
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.Smith508'
+//apply plugin: 'com.github.dcendents.android-maven'
+//group='com.github.Smith508'
