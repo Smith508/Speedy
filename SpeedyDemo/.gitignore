@@ -4,6 +4,7 @@
 **/local.properties/
 app/local.properties/
 app/local.properties
+/github.properties
 /.idea/workspace.xml
 /.idea/libraries
 **/.idea/
