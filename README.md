@@ -3,6 +3,8 @@
 
 #### Speedy is a class designed to help with optimization and is meant to show you how long a method or task takes to complete.
 
+### TODO: Update README to fit Kotlin Rewrite
+
 ## Overview
 Speedy consists of three key methods: **.startJob()**, **.checkDelta(String jobDescription)** & **.finishTime()**
 
