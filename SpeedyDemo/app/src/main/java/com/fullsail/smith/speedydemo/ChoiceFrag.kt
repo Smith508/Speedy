@@ -16,60 +16,25 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.smith.library.speedy.Speedy
 import java.util.ArrayList
 
-class ChoiceFrag : Fragment(), View.OnClickListener {
+class ChoiceFrag: Fragment() {
 
-    val TAG = "ChoiceFrag.TAGS"
-
-    val ACTION_SERIAL = "com.fullsail.smith.speedysample.ACTION_SERIAL"
-    val ACTION_SERIAL_CUSTOM = "com.fullsail.smith.speedysample.ACTION_SERIAL_CUSTOM"
-    val ACTION_PARCELABLE = "com.fullsail.smith.speedysample.ACTION_PARCELABLE"
-    val EXTRA_SERIAL = "com.fullsail.smith.speedysample.EXTRA_SERIAL"
-    val EXTRA_SERIAL_CUSTOM = "com.fullsail.smith.speedysample.EXTRA_SERIAL_CUSTOM"
-    val EXTRA_PARCELABLE = "com.fullsail.smith.speedysample.EXTRA_PARCELABLE"
-
-    val EXTRA_SPEEDY = "com.fullsail.smith.speedysample.EXTRA_SPEEDY"
-
-    // Global SpeedyKt object for the sake of this example, best declared on a method to method basis.
+    // Global Speedy object for the sake of this example, best declared on a method to method basis.
     private var speedy: Speedy? = null
-
-    fun newInstance(): ChoiceFrag {
-
-        return ChoiceFrag()
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-
-        super.onActivityCreated(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_choice_layout, container, false)
+        return inflater.inflate(R.layout.fragment_choice_layout, container, false).apply {
 
-        val tempStrings = ArrayList<String>()
-        val tempNums = ArrayList<Int>()
-
-        val serial = view.findViewById<Button>(R.id.main_serializable_button)
-        val parcelable = view.findViewById<Button>(R.id.main_parcelable_button)
-        val localBroadcastSerializbleButton = view.findViewById<Button>(R.id.main_local_broadcast_serializable_button)
-        val localBroadcastParcelableButton = view.findViewById<Button>(R.id.main_local_broadcast_parcelable_button)
-        val forLoopButton = view.findViewById<Button>(R.id.main_for_loop_button)
-        val forEachButton = view.findViewById<Button>(R.id.main_for_each_button)
-        val whileButton = view.findViewById<Button>(R.id.main_while_loop_button)
-        val customSerializable = view.findViewById<Button>(R.id.main_custom_serialzable)
-        val customLocalSerializable = view.findViewById<Button>(R.id.main_local_custom_serializable)
-
-        serial.setOnClickListener(this)
-        parcelable.setOnClickListener(this)
-        localBroadcastSerializbleButton.setOnClickListener(this)
-        localBroadcastParcelableButton.setOnClickListener(this)
-        forLoopButton.setOnClickListener(this)
-        forEachButton.setOnClickListener(this)
-        whileButton.setOnClickListener(this)
-        customSerializable.setOnClickListener(this)
-        customLocalSerializable.setOnClickListener(this)
-
-        return view
+            findViewById<Button>(R.id.main_serializable_button).setOnClickListener(onClickListener)
+            findViewById<Button>(R.id.main_parcelable_button).setOnClickListener(onClickListener)
+            findViewById<Button>(R.id.main_local_broadcast_serializable_button).setOnClickListener(onClickListener)
+            findViewById<Button>(R.id.main_local_broadcast_parcelable_button).setOnClickListener(onClickListener)
+            findViewById<Button>(R.id.main_for_loop_button).setOnClickListener(onClickListener)
+            findViewById<Button>(R.id.main_for_each_button).setOnClickListener(onClickListener)
+            findViewById<Button>(R.id.main_while_loop_button).setOnClickListener(onClickListener)
+            findViewById<Button>(R.id.main_custom_serialzable).setOnClickListener(onClickListener)
+            findViewById<Button>(R.id.main_local_custom_serializable).setOnClickListener(onClickListener)
+        }
     }
 
     override fun onResume() {
@@ -111,58 +76,58 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
 
         override fun onReceive(context: Context, intent: Intent) {
 
-            speedy!!.checkDelta("Time check from broadcast send to onReceive hit")
+            speedy?.checkDelta("Time check from broadcast send to onReceive hit")
 
             // Call start job because this is where I am beginning the check.
-            speedy!!.startJob()
+            speedy?.startJob()
             if (intent.action!!.contentEquals(ACTION_SERIAL)
                     && intent.hasExtra(EXTRA_SERIAL)) {// Serial
 
                 // Call checkDelta to demonstrate how long this if check took.
-                speedy!!.checkDelta("BroadcastReceiver: Intent check for Serializable")
+                speedy?.checkDelta("BroadcastReceiver: Intent check for Serializable")
 
                 // Start job for the reading of
-                speedy!!.startJob()
+                speedy?.startJob()
 
                 // Pull SerialData from intent
                 val data = intent.getSerializableExtra(EXTRA_SERIAL) as SerialData
 
                 // Call checkDelta for the reading of the SerialData object from intent
-                speedy!!.checkDelta("BroadcastReceiver: Time check for reading of Serializable object")
+                speedy?.checkDelta("BroadcastReceiver: Time check for reading of Serializable object")
 
             } else if (intent.action!!.contentEquals(ACTION_PARCELABLE)
                     && intent.hasExtra(EXTRA_PARCELABLE)) {// Parcelable
 
                 // Call checkDelta to demonstrate how long this if check took.
-                speedy!!.checkDelta("BroadcastReceiver: Intent check for Parcelable")
+                speedy?.checkDelta("BroadcastReceiver: Intent check for Parcelable")
 
                 // Start job for the reading of
-                speedy!!.startJob()
+                speedy?.startJob()
 
                 // Pull ParcelableData from intent
                 val data = intent.getParcelableExtra<ParcelableData>(EXTRA_PARCELABLE)
 
                 // Call checkDelta for the reading of the ParcelableData object from intent
-                speedy!!.checkDelta("BroadcastReceiver: Time check for reading of Parcelable object")
+                speedy?.checkDelta("BroadcastReceiver: Time check for reading of Parcelable object")
 
             } else if (intent.action!!.contentEquals(ACTION_SERIAL_CUSTOM)
                     && intent.hasExtra(EXTRA_SERIAL_CUSTOM)) {// Custom Serializable
 
                 // Call checkDelta to demonstrate how long this if check took.
-                speedy!!.checkDelta("BroadcastReceiver: Intent check for custom serialization")
+                speedy?.checkDelta("BroadcastReceiver: Intent check for custom serialization")
 
                 // Start job for the reading of
-                speedy!!.startJob()
+                speedy?.startJob()
 
                 // Pull CustomSerial from intent
                 val data = intent.getSerializableExtra(EXTRA_SERIAL_CUSTOM) as CustomSerial
 
                 // Call checkDelta for the reading of the ParcelableData object from intent
-                speedy!!.checkDelta("BroadcastReceiver: Time check for reading of Custom Serializable object")
+                speedy?.checkDelta("BroadcastReceiver: Time check for reading of Custom Serializable object")
             }
 
             // Finish the time
-            speedy!!.finishTime()
+            speedy?.finishTime()
 
             // This line is also for the sake of this example. This resets the global if need be, but as stated earlier
             // this is best used on a method to method basis
@@ -181,8 +146,6 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
     fun loadView() {
         Log.d(TAG, "loadView()")
     }
-
-
 
     fun test() {
 
@@ -244,9 +207,9 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
         }
     }
 
-    override fun onClick(v: View?) {
+    private val onClickListener = View.OnClickListener {
 
-        when(v!!.id) {
+        when(it.id) {
 
             R.id.main_serializable_button -> {
 
@@ -273,15 +236,13 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
                 serialBroadcast.putExtra(EXTRA_SERIAL, data)
 
                 // Start Job before broadcast send
-                speedy!!.startJob()
+                speedy?.startJob()
 
                 // Update the method name with 'Serial Broadcast'
-                speedy!!.updateMethodName("Serial Broadcast:")
+                speedy?.updateMethodName("Serial Broadcast:")
 
                 // Send regular broadcast
-                activity?.let {
-                    it.sendBroadcast(serialBroadcast)
-                }
+                it.context.sendBroadcast(serialBroadcast)
             }
 
             R.id.main_parcelable_button -> {
@@ -299,7 +260,7 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
 
                     tempStrings.add(i.toString())
                     tempNums.add(i)
-                }//END for int i = 0; i < 750; i++
+                }
 
                 // TODO: Uncomment to show other finish method results
                 //SpeedyKt checkSpeedy = new SpeedyKt("Just Checking");
@@ -315,34 +276,19 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
                 parcelableBroadcast.putExtra(EXTRA_PARCELABLE, data)
 
                 // Start job before broadcast send
-                speedy!!.startJob()
+                speedy?.startJob()
 
                 // Update the method name with 'Parcelable Broadcast'
-                speedy!!.updateMethodName("Parcelable Broadcast:")
+                speedy?.updateMethodName("Parcelable Broadcast:")
 
                 // Send regular broadcast
-                activity?.let {
-                    it.sendBroadcast(parcelableBroadcast)
-                }
-            }
-        }
-
-        when (v.id) {
-
-            /*
-            R.id.main_serializable_button.run {
-
-
+                it.context.sendBroadcast(parcelableBroadcast)
             }
 
-            R.id.main_parcelable_button run {
+            R.id.main_local_broadcast_serializable_button -> {
 
-            }
-
-            R.id.main_local_broadcast_serializable_button run {
-
-                val tempStrings = ArrayList<String>()
-                val tempNums = ArrayList<Int>()
+                val tempStrings = arrayListOf<String>()
+                val tempNums = arrayListOf<Int>()
 
                 Toast.makeText(activity, "Local Broadcast Serializable Tapped", Toast.LENGTH_SHORT).show()
 
@@ -354,7 +300,7 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
 
                     tempStrings.add(i.toString())
                     tempNums.add(i)
-                }//END for int i = 0; i < 750; i++
+                }
 
                 // Set data
                 data.nums = tempNums
@@ -365,20 +311,19 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
                 serialBroadcast.putExtra(EXTRA_SERIAL, data)
 
                 // Start job before local broadcast send
-                speedy.startJob()
+                speedy?.startJob()
 
                 // Update the method name with 'Serial Broadcast'
-                speedy.updateMethodName("Local Serial Broadcast:")
+                speedy?.updateMethodName("Local Serial Broadcast:")
 
                 // Send local broadcast
-                LocalBroadcastManager.getInstance(activity!!).sendBroadcast(serialBroadcast)
-                break
+                LocalBroadcastManager.getInstance(it.context).sendBroadcast(serialBroadcast)
             }
 
-            R.id.main_local_broadcast_parcelable_button run {
+            R.id.main_local_broadcast_parcelable_button -> {
 
-                val tempStrings = ArrayList<String>()
-                val tempNums = ArrayList<Int>()
+                val tempStrings = arrayListOf<String>()
+                val tempNums = arrayListOf<Int>()
 
                 Toast.makeText(activity, "Local Broadcast Parcelable Tapped", Toast.LENGTH_SHORT).show()
 
@@ -390,7 +335,7 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
 
                     tempStrings.add(i.toString())
                     tempNums.add(i)
-                }//END for int i = 0; i < 750; i++
+                }
 
                 data.nums = tempNums
                 data.strings = tempStrings
@@ -400,17 +345,16 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
                 parcelableBroadcast.putExtra(EXTRA_PARCELABLE, data)
 
                 // Start job before local broadcast send
-                speedy.startJob()
+                speedy?.startJob()
 
                 // Update the method name with 'Parcelable Broadcast'
-                speedy.updateMethodName("Local Parcelable Broadcast:")
+                speedy?.updateMethodName("Local Parcelable Broadcast:")
 
                 // Send local parcelable broadcast
-                LocalBroadcastManager.getInstance(activity!!).sendBroadcast(parcelableBroadcast)
-                break
+                LocalBroadcastManager.getInstance(it.context).sendBroadcast(parcelableBroadcast)
             }
 
-            R.id.main_while_loop_button run {
+            R.id.main_while_loop_button -> {
 
                 Toast.makeText(activity, "While Loop button pressed", Toast.LENGTH_SHORT).show()
 
@@ -426,19 +370,16 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
 
                     Log.i(TAG, "onClick: i: $i")
                     i++
-                }//END while i < 750
+                }
 
                 // Check how long it took to loop and print
                 speedLogger.checkDelta("while loop finished looping 750 times")
 
                 // Finish speedy
                 speedLogger.finishTime()
-                break
             }
 
-            R.id.main_for_each_button run {
-
-                val speedyKt = SpeedyKt("ForEachButton:onClick KOTLIN")
+            R.id.main_for_each_button -> {
 
                 Toast.makeText(activity, "For Each button pressed", Toast.LENGTH_SHORT).show()
 
@@ -449,32 +390,28 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
                 for (i in 0..749) {
 
                     nums.add(i)
-                }//END for int i = 0; i < 750; i++
+                }
 
                 // Creating Speedy object
                 val speedLogger = Speedy("forEachButton:onClick")
 
                 // Start the job
                 speedLogger.startJob()
-                speedyKt.startJob()
 
                 // loop through 750 times
                 for (num in nums) {
 
                     Log.i(TAG, "onClick: num: $num")
-                }//END for num : nums
+                }
 
                 // Check how long it took to loop and print
                 speedLogger.checkDelta("for each finished looping 750 times")
-                speedyKt.checkDelta("for each finished looping 750 times")
 
                 // Finish speedy
                 speedLogger.finishTime()
-                speedyKt.finishTime()
-                break
             }
 
-            R.id.main_for_loop_button run {
+            R.id.main_for_loop_button -> {
 
                 Toast.makeText(activity, "For Loop button pressed", Toast.LENGTH_SHORT).show()
 
@@ -488,20 +425,30 @@ class ChoiceFrag : Fragment(), View.OnClickListener {
                 for (i in 0..149) {
 
                     Log.i(TAG, "onClick: i: $i")
-                }//END for int i = 0; i < 750; i++
+                }
 
                 // Check how long it took to loop and print
                 speedLogger.checkDelta("for loop finished looping 750 times")
 
                 // Finish speedy
                 speedLogger.finishTime()
-                break
             }
-
-            //case R.id.mainser
-            else
-            break
-             */
+            else -> {}
         }
+    }
+
+    companion object {
+
+        const val TAG = "ChoiceFrag.TAGS"
+
+        private const val packageBase = "com.smith.demo.speedydemo"
+
+        const val ACTION_SERIAL = "$packageBase.ACTION_SERIAL"
+        const val ACTION_SERIAL_CUSTOM = "$packageBase.ACTION_SERIAL_CUSTOM"
+        const val ACTION_PARCELABLE = "$packageBase.ACTION_PARCELABLE"
+        const val EXTRA_SERIAL = "$packageBase.EXTRA_SERIAL"
+        const val EXTRA_SERIAL_CUSTOM = "$packageBase.EXTRA_SERIAL_CUSTOM"
+        const val EXTRA_PARCELABLE = "$packageBase.EXTRA_PARCELABLE"
+        const val EXTRA_SPEEDY = "$packageBase.EXTRA_SPEEDY"
     }
 }

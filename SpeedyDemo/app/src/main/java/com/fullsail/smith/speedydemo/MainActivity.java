@@ -5,8 +5,6 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.smith.library.speedy.Speedy;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -15,17 +13,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null){
-
-            //ChoiceFrag frag = ChoiceFrag.newInstance();
-            //getSupportFragmentManager().beginTransaction().replace(R.id.activity_main,frag,ChoiceFrag.TAG).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new ChoiceFrag(), ChoiceFrag.TAG).commit();
         }
 
         TestUtil.INSTANCE.expressSimple();
         TestUtil.INSTANCE.testSealed();
         TestUtil.INSTANCE.testIntStates();
-
-    }//END onCreate
-
+    }
 
     private void calc() {
 
@@ -60,9 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
                 loan = minusInterest - paymentMinutesInterest;
                 Log.i("CALCS", "calc: Loan at END OF MONTH: " + loan);
-
             }
         }
-
     }
 }
